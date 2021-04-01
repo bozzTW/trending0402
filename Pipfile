@@ -8,6 +8,7 @@ selenium = "*"
 bs4 = "*"
 lxml = "*"
 flask = "*"
+gunicorn = "*"
 
 [dev-packages]
 

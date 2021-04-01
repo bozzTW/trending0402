@@ -3,13 +3,21 @@ from bs4 import BeautifulSoup
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import json
+import json, os
 url = "https://trends.google.com/trends/trendingsearches/daily?geo=TW"
 
 # set webdriver and setting, and only support ver 89 or late by 20210402
-options = webdriver.ChromeOptions()
-options.add_argument('--headless')
-browser = webdriver.Chrome(options=options, executable_path="/Users/loic/Workspace/selenium/chromedriver")
+
+
+chrome_options = webdriver.ChromeOptions()
+chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--disable-dev-shm-usage")
+chrome_options.add_argument("--no-sandbox")
+browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+
+
+# browser = webdriver.Chrome(options=chrome_options, executable_path="/Users/loic/Workspace/selenium/chromedriver")
 
 browser.get(url)
 # set waiting condition
